@@ -27,8 +27,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D6E6E944
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager.Business.WindowsPhone.Test", "MoneyManager.Business.WindowsPhone.Test\MoneyManager.Business.WindowsPhone.Test.csproj", "{529E9009-6BE9-4630-84E4-0288A9CE4083}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyManager.Windows", "MoneyManager\MoneyManager.Windows\MoneyManager.Windows.csproj", "{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		MoneyManager\MoneyManager.Shared\MoneyManager.Shared.projitems*{1e89b344-8b07-4e30-8591-44ee1ad8caf1}*SharedItemsImports = 4
 		MoneyManager\MoneyManager.Shared\MoneyManager.Shared.projitems*{01c92d11-9b98-4ff3-bf14-89917369ab92}*SharedItemsImports = 4
 		MoneyManager\MoneyManager.Shared\MoneyManager.Shared.projitems*{c2b4df67-abfd-4a73-a0c6-471516c01eca}*SharedItemsImports = 13
 	EndGlobalSection
@@ -188,6 +191,36 @@ Global
 		{529E9009-6BE9-4630-84E4-0288A9CE4083}.Release|x86.ActiveCfg = Release|x86
 		{529E9009-6BE9-4630-84E4-0288A9CE4083}.Release|x86.Build.0 = Release|x86
 		{529E9009-6BE9-4630-84E4-0288A9CE4083}.Release|x86.Deploy.0 = Release|x86
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|ARM.ActiveCfg = Debug|ARM
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|ARM.Build.0 = Debug|ARM
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|ARM.Deploy.0 = Debug|ARM
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|x64.ActiveCfg = Debug|x64
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|x64.Build.0 = Debug|x64
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|x64.Deploy.0 = Debug|x64
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|x86.ActiveCfg = Debug|x86
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|x86.Build.0 = Debug|x86
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Debug|x86.Deploy.0 = Debug|x86
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|ARM.ActiveCfg = Release|ARM
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|ARM.Build.0 = Release|ARM
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|ARM.Deploy.0 = Release|ARM
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|Mixed Platforms.Build.0 = Release|x86
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|Mixed Platforms.Deploy.0 = Release|x86
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|x64.ActiveCfg = Release|x64
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|x64.Build.0 = Release|x64
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|x64.Deploy.0 = Release|x64
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|x86.ActiveCfg = Release|x86
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|x86.Build.0 = Release|x86
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -201,5 +234,6 @@ Global
 		{97C5FD49-1128-4FA5-B529-264562A416EF} = {40D4888B-FCFE-4C53-8B5C-1082881C3571}
 		{206C8CE3-628B-4CD1-8354-8F83546F6C7C} = {D6E6E944-C844-4882-A72A-F86C17196117}
 		{529E9009-6BE9-4630-84E4-0288A9CE4083} = {D6E6E944-C844-4882-A72A-F86C17196117}
+		{1E89B344-8B07-4E30-8591-44EE1AD8CAF1} = {40D4888B-FCFE-4C53-8B5C-1082881C3571}
 	EndGlobalSection
 EndGlobal

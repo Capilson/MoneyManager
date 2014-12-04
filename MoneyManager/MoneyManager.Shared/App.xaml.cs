@@ -95,8 +95,10 @@ namespace MoneyManager
 
             RecurringTransactionLogic.CheckRecurringTransactions();
             await TransactionLogic.ClearTransactions();
+#if WINDOWS_PHONE_APP
 
             BackgroundTaskLogic.RegisterBackgroundTask();
+#endif
         }
 
 #if WINDOWS_PHONE_APP
