@@ -1,7 +1,6 @@
 ﻿#region
 
 using System;
-using Windows.ApplicationModel.Email;
 using Windows.System;
 using Windows.UI.Xaml.Input;
 using MoneyManager.Business.Helper;
@@ -20,16 +19,10 @@ namespace MoneyManager.UserControls
             lblVersion.Text = Utilities.GetVersion();
         }
 
+
         private async void ComposeMail_OnTap(object sender, TappedRoutedEventArgs e)
         {
-            var sendTo = new EmailRecipient
-            {
-                Address = Translation.GetTranslation("SupportMail")
-            };
-
-            var mail = new EmailMessage {Subject = Translation.GetTranslation("Feedback")};
-            mail.To.Add(sendTo);
-            await EmailManager.ShowComposeNewEmailAsync(mail);
+            Utilities.SendMail(Translation.GetTranslation("SupportMail"), Translation.GetTranslation("Feedback"), String.Empty);
         }
 
         private async void GoToWebsite_OnTap(object sender, TappedRoutedEventArgs e)

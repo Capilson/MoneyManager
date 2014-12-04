@@ -6,8 +6,9 @@ using Microsoft.Practices.ServiceLocation;
 using MoneyManager.Business.Logic;
 using MoneyManager.DataAccess.DataAccess;
 using MoneyManager.DataAccess.Model;
+#if WINDOWS_PHONE_APP
 using MoneyManager.Dialogs;
-
+#endif
 namespace MoneyManager.UserControls
 {
     public partial class CategoryListUserControl
@@ -34,8 +35,10 @@ namespace MoneyManager.UserControls
             var viewModel = ServiceLocator.Current.GetInstance<CategoryDataAccess>();
             viewModel.SelectedCategory = category;
 
+#if WINDOWS_PHONE_APP
             var dialog = new CategoryDialog(true);
             await dialog.ShowAsync();
+#endif
         }
 
         private void DeleteCategory(object sender, RoutedEventArgs e)
