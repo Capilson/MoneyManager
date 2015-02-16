@@ -85,7 +85,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)Styles\AppStyles.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Styles\TextStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\ThemeResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

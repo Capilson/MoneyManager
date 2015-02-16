@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="using:System">
+    <ResourceDictionary.ThemeDictionaries>
+
+        <ResourceDictionary x:Key="Dark">
+
+            <!-- Common colors -->
+            <Color x:Key="AppAccentColor">#ff6b53</Color>
+            <Color x:Key="AppBackgroundColor">#FF1C1B1B</Color>
+
+            <!-- Colors -->
+
+            <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush"
+                             Color="#CCFFFFFF" />
+
+            <SolidColorBrush x:Name="ListItemSolidColorBrush"
+                             Color="White" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>
