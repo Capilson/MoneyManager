@@ -50,6 +50,7 @@
         </StackPanel>
 
         <TextBox Text="{Binding SelectedAccount.Note, Mode=TwoWay}"
+                 Style="{StaticResource CustomTextBoxStyle}"
                  Header="Notes" VerticalAlignment="Top"
                  x:Uid="Notes" Margin="0,0,-0.167,0"
                  TextWrapping="Wrap" />

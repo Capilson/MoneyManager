@@ -8,14 +8,30 @@
             <!-- Common colors -->
             <Color x:Key="AppAccentColor">#ff6b53</Color>
             <Color x:Key="AppBackgroundColor">#FF1C1B1B</Color>
+            <Color x:Key="SelectionHighlightColor">#ff6b53</Color>
+            
 
             <!-- Colors -->
 
             <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush"
-                             Color="#CCFFFFFF" />
+                             Color="WhiteSmoke" />
+
+            <SolidColorBrush x:Key="PhoneAccentBrush"
+                             Color="{StaticResource AppAccentColor}" />
+
+            <SolidColorBrush x:Key="PhoneTextBoxEditBorderBrush"
+                             Color="{StaticResource AppAccentColor}" />
+
+            <SolidColorBrush x:Key="PhoneRadioCheckBoxPressedBrush"
+                             Color="{StaticResource AppAccentColor}" />
 
             <SolidColorBrush x:Name="ListItemSolidColorBrush"
-                             Color="White" />
+                             Color="#CCFFFFFF" />
+            
+            <Style TargetType="TextBox" x:Key="CustomTextBoxStyle" >
+                <Setter Property="SelectionHighlightColor" Value="{StaticResource AppAccentColor}" />
+            </Style>
+            
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

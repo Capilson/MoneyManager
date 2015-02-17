@@ -19,7 +19,7 @@
     </Page.Transitions>
 
     <Page.BottomAppBar>
-        <CommandBar Background="{StaticResource PhoneAccentBrush}">
+        <CommandBar Background="#FFFF6B53">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="add" x:Uid="AddIncomeLabel" Label="add income" Click="AddIncomeClick" />
                 <AppBarButton Icon="remove" x:Uid="AddSpendingLabel" Label="add spending" Click="AddSpendingClick" />
@@ -55,7 +55,7 @@
             </TransitionCollection>
         </Grid.ChildrenTransitions>
 
-        <Hub x:Uid="ApplicationNameHeader" Header="Money Fox">
+        <Hub x:Uid="ApplicationNameHeader" Header="Money Fox" Foreground="Black">
             <HubSection x:Uid="AccountsMenu" Header="overview">
                 <DataTemplate>
                     <userControls:AccountListUserControl />
