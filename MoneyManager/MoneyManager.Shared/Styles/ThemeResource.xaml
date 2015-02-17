@@ -28,8 +28,6 @@
             <SolidColorBrush x:Name="ListItemSolidColorBrush"
                              Color="#CCFFFFFF" />
 
-            <SolidColorBrush x:Name="PhoneTextBoxEditBorderBrush"
-                             Color="{StaticResource AppAccentColor}" />
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>
