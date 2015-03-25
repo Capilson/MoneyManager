@@ -10,6 +10,8 @@ using MoneyManager.DataAccess;
 using MoneyManager.DataAccess.DataAccess;
 using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation;
+using MoneyManager.Foundation.Model;
+using MoneyManager.Foundation.OperationContracts;
 using SQLite.Net;
 
 namespace MoneyManager.Business.WindowsPhone.Test.Logic {
@@ -23,8 +25,8 @@ namespace MoneyManager.Business.WindowsPhone.Test.Logic {
             get { return ServiceLocator.Current.GetInstance<AddTransactionViewModel>(); }
         }
 
-        private static TransactionDataAccess transactionData {
-            get { return ServiceLocator.Current.GetInstance<TransactionDataAccess>(); }
+        private static ITransactionRepository TransactionRepository {
+            get { return ServiceLocator.Current.GetInstance<ITransactionRepository>(); }
         }
 
         #endregion
@@ -50,7 +52,7 @@ namespace MoneyManager.Business.WindowsPhone.Test.Logic {
                 db.Insert(_sampleAccount);
             }
 
-            transactionData.AllTransactions = new ObservableCollection<FinancialTransaction>();
+            TransactionRepository.Data = new ObservableCollection<FinancialTransaction>();
         }
 
         [TestMethod]
@@ -59,15 +61,15 @@ namespace MoneyManager.Business.WindowsPhone.Test.Logic {
 
             Assert.IsFalse(addTransactionView.IsEdit);
             Assert.IsFalse(addTransactionView.IsTransfer);
-            Assert.AreEqual((int) TransactionType.Income, addTransactionView.SelectedTransaction.Type);
-            Assert.IsFalse(addTransactionView.SelectedTransaction.IsExchangeModeActive);
+            Assert.AreEqual((int)TransactionType.Income, TransactionRepository.Selected.Type);
+            Assert.IsFalse(TransactionRepository.Selected.IsExchangeModeActive);
 
             TransactionLogic.GoToAddTransaction(TransactionType.Transfer);
 
             Assert.IsFalse(addTransactionView.IsEdit);
             Assert.IsTrue(addTransactionView.IsTransfer);
-            Assert.AreEqual((int) TransactionType.Transfer, addTransactionView.SelectedTransaction.Type);
-            Assert.IsFalse(addTransactionView.SelectedTransaction.IsExchangeModeActive);
+            Assert.AreEqual((int)TransactionType.Transfer, TransactionRepository.Selected.Type);
+            Assert.IsFalse(TransactionRepository.Selected.IsExchangeModeActive);
         }
 
         [TestMethod]
@@ -107,20 +109,20 @@ namespace MoneyManager.Business.WindowsPhone.Test.Logic {
 
             await TransactionLogic.SaveTransaction(transaction);
 
-            Assert.AreEqual(1, transactionData.AllTransactions.Count);
-            Assert.AreEqual(transaction, transactionData.AllTransactions.First());
+            Assert.AreEqual(1, TransactionRepository.Data.Count);
+            Assert.AreEqual(transaction, TransactionRepository.Data.First());
 
             transaction.Amount = 80;
             transaction.AmountWithoutExchange = 80;
 
             await TransactionLogic.UpdateTransaction(transaction);
 
-            Assert.AreEqual(1, transactionData.AllTransactions.Count);
-            Assert.AreEqual(transaction, transactionData.AllTransactions.First());
+            Assert.AreEqual(1, TransactionRepository.Data.Count);
+            Assert.AreEqual(transaction, TransactionRepository.Data.First());
 
             await TransactionLogic.DeleteTransaction(transaction, true);
 
-            Assert.IsFalse(transactionData.AllTransactions.Any());
+            Assert.IsFalse(TransactionRepository.Data.Any());
         }
 
         [TestMethod]
