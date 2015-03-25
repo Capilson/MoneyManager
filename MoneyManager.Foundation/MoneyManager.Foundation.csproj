@@ -47,20 +47,34 @@
   <ItemGroup>
     <Compile Include="AbstractDataAccess.cs" />
     <Compile Include="Enumerations.cs" />
+    <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Country.cs" />
+    <Compile Include="Model\FinancialTransaction.cs" />
     <Compile Include="Model\ProductItem.cs" />
+    <Compile Include="Model\RecurringTransaction.cs" />
     <Compile Include="Model\StatisticItem.cs" />
     <Compile Include="OperationContracts\IDataAccess.cs" />
     <Compile Include="OperationContracts\IRepository.cs" />
     <Compile Include="OperationContracts\ISecondTile.cs" />
+    <Compile Include="OperationContracts\ITransactionRepository.cs" />
     <Compile Include="OperationContracts\IUserNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Translation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PropertyChanged">
       <HintPath>..\packages\PropertyChanged.Fody.1.49.0\Lib\portable-net4+sl4+wp8+win8+wpa81+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="SQLite.Net">
+      <HintPath>..\packages\SQLite.Net-PCL.2.4.1\lib\portable-win8+net45+wp8+wpa81+MonoAndroid1+MonoTouch1\SQLite.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLiteNetExtensions">
+      <HintPath>..\packages\SQLiteNetExtensions.1.2.5\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\SQLiteNetExtensions.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Insights">
       <HintPath>..\packages\Xamarin.Insights.1.9.1.107\lib\portable-win+net40+wp80+windows8+wpa+MonoAndroid10+MonoTouch10\Xamarin.Insights.dll</HintPath>
