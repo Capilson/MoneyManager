@@ -9,6 +9,7 @@ using MoneyManager.Business.ViewModels;
 using MoneyManager.DataAccess.DataAccess;
 using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation;
+using MoneyManager.Foundation.Model;
 using Xamarin;
 
 #endregion
@@ -96,11 +97,11 @@ namespace MoneyManager.Business.Logic {
                 account.CurrentBalance += amount;
                 transaction.Cleared = true;
 
-                accountDataAccess.Update(account);
-                transactionData.Update(transaction);
+                accountDataAccess.Save(account);
+                transactionData.Save(transaction);
             } else {
                 transaction.Cleared = false;
-                transactionData.Update(transaction);
+                transactionData.Save(transaction);
             }
         }
 

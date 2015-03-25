@@ -1,9 +1,11 @@
 ﻿#region
 
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation;
+using MoneyManager.Foundation.Model;
 using PropertyChanged;
 using SQLite.Net;
 
@@ -47,17 +49,9 @@ namespace MoneyManager.DataAccess.DataAccess {
             }
         }
 
-        protected override void GetListFromDb() {
+        protected override List<RecurringTransaction> GetListFromDb() {
             using (SQLiteConnection dbConn = SqlConnectionFactory.GetSqlConnection()) {
-                AllRecurringTransactions =
-                    new ObservableCollection<RecurringTransaction>(dbConn.Table<RecurringTransaction>().ToList());
-            }
-        }
-
-        protected override void UpdateItem(RecurringTransaction itemToUpdate) {
-            using (SQLiteConnection dbConn = SqlConnectionFactory.GetSqlConnection()) {
-                dbConn.Update(itemToUpdate);
-                LoadList();
+                return dbConn.Table<RecurringTransaction>().ToList();
             }
         }
 
@@ -75,7 +69,7 @@ namespace MoneyManager.DataAccess.DataAccess {
                 Save(recurringTransaction);
             } else {
                 recurringTransaction.Id = transaction.ReccuringTransactionId.Value;
-                Update(recurringTransaction);
+                Save(recurringTransaction);
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿#region
 
 using MoneyManager.DataAccess.Model;
+using MoneyManager.Foundation.Model;
 using SQLite.Net;
 
 #endregion

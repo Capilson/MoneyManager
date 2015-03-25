@@ -44,7 +44,7 @@ namespace MoneyManager.DataAccess.WindowsPhone.Test.DataAccess {
 
             account.Name = secondName;
 
-            accountDataAccess.Update(account);
+            accountDataAccess.Save(account);
 
             accountDataAccess.LoadList();
             list = accountDataAccess.AllAccounts;

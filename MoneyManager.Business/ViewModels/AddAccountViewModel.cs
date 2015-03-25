@@ -72,7 +72,7 @@ namespace MoneyManager.Business.ViewModels {
 
         public void Save() {
             if (IsEdit) {
-                ServiceLocator.Current.GetInstance<AccountDataAccess>().Update(SelectedAccount);
+                ServiceLocator.Current.GetInstance<AccountDataAccess>().Save(SelectedAccount);
             } else {
                 ServiceLocator.Current.GetInstance<AccountDataAccess>().Save(SelectedAccount);
             }

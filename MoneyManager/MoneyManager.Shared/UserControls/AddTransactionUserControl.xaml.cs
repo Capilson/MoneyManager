@@ -9,6 +9,8 @@ using MoneyManager.Business.ViewModels;
 using MoneyManager.DataAccess.DataAccess;
 using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation;
+using MoneyManager.Foundation.Model;
+using MoneyManager.Foundation.OperationContracts;
 using MoneyManager.Views;
 
 #endregion
@@ -24,7 +26,7 @@ namespace MoneyManager.UserControls {
         }
 
         private FinancialTransaction SelectedTransaction {
-            get { return ServiceLocator.Current.GetInstance<TransactionDataAccess>().SelectedTransaction; }
+            get { return ServiceLocator.Current.GetInstance<ITransactionRepository>().Selected; }
         }
 
         private void RemoveZeroOnFocus(object sender, RoutedEventArgs e) {

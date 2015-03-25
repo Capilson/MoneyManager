@@ -7,16 +7,19 @@ using Windows.Globalization;
 using Windows.System.UserProfile;
 using Windows.UI.Popups;
 using Microsoft.Practices.ServiceLocation;
+using MoneyManager.Business.Repositories;
 using MoneyManager.DataAccess.DataAccess;
 using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation;
+using MoneyManager.Foundation.Model;
+using MoneyManager.Foundation.OperationContracts;
 
 #endregion
 
 namespace MoneyManager.Business.Logic {
     public class RegionLogic {
-        private static TransactionDataAccess transactionData {
-            get { return ServiceLocator.Current.GetInstance<TransactionDataAccess>(); }
+        private static ITransactionRepository TransactionRepository {
+            get { return ServiceLocator.Current.GetInstance<ITransactionRepository>(); }
         }
 
         private static AccountDataAccess accountData {
@@ -53,16 +56,16 @@ namespace MoneyManager.Business.Logic {
         }
 
         private static void ChangeTransactions() {
-            foreach (FinancialTransaction transaction in transactionData.AllTransactions) {
+            foreach (FinancialTransaction transaction in TransactionRepository.Data) {
                 transaction.Currency = settings.DefaultCurrency;
-                transactionData.Update(transaction);
+                TransactionRepository.Save(transaction);
             }
         }
 
         private static void ChangeAccounts() {
             foreach (Account account in accountData.AllAccounts) {
                 account.Currency = settings.DefaultCurrency;
-                accountData.Update(account);
+                accountData.Save(account);
             }
         }
 

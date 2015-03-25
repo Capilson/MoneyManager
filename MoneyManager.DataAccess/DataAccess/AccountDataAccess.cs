@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using MoneyManager.DataAccess.Model;
@@ -17,7 +18,7 @@ namespace MoneyManager.DataAccess.DataAccess {
         public ObservableCollection<Account> AllAccounts { get; set; }
 
         protected override void SaveToDb(Account itemToAdd) {
-            using (SQLiteConnection dbConn = SqlConnectionFactory.GetSqlConnection()) {
+            using (var dbConn = SqlConnectionFactory.GetSqlConnection()) {
                 if (AllAccounts == null) {
                     AllAccounts = new ObservableCollection<Account>();
                 }
@@ -29,23 +30,17 @@ namespace MoneyManager.DataAccess.DataAccess {
         }
 
         protected override void DeleteFromDatabase(Account itemToDelete) {
-            using (SQLiteConnection dbConn = SqlConnectionFactory.GetSqlConnection()) {
+            using (var dbConn = SqlConnectionFactory.GetSqlConnection()) {
                 AllAccounts.Remove(itemToDelete);
                 dbConn.Delete(itemToDelete);
             }
         }
 
-        protected override void GetListFromDb() {
-            using (SQLiteConnection dbConn = SqlConnectionFactory.GetSqlConnection()) {
-                AllAccounts = new ObservableCollection<Account>(dbConn.Table<Account>()
-                    .ToList()
-                    .OrderBy(x => x.Name));
-            }
-        }
-
-        protected override void UpdateItem(Account itemToUpdate) {
-            using (SQLiteConnection dbConn = SqlConnectionFactory.GetSqlConnection()) {
-                dbConn.Update(itemToUpdate, typeof (Account));
+        protected override List<Account> GetListFromDb() {
+            using (var dbConn = SqlConnectionFactory.GetSqlConnection()) {
+                return dbConn.Table<Account>()
+                    .OrderBy(x => x.Name)
+                    .ToList();
             }
         }
     }

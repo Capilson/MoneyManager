@@ -11,6 +11,8 @@ using MoneyManager.Business.Logic;
 using MoneyManager.DataAccess.DataAccess;
 using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation;
+using MoneyManager.Foundation.Model;
+using MoneyManager.Foundation.OperationContracts;
 using PropertyChanged;
 
 #endregion
@@ -18,16 +20,14 @@ using PropertyChanged;
 namespace MoneyManager.Business.ViewModels {
     [ImplementPropertyChanged]
     public class AddTransactionViewModel {
-        public AddTransactionViewModel() {
+        private readonly ITransactionRepository _transactionRepository;
+
+        public AddTransactionViewModel(ITransactionRepository transactionRepository) {
+            _transactionRepository = transactionRepository;
             IsNavigationBlocked = true;
         }
 
         #region Properties
-
-        public FinancialTransaction SelectedTransaction {
-            get { return ServiceLocator.Current.GetInstance<TransactionDataAccess>().SelectedTransaction; }
-            set { ServiceLocator.Current.GetInstance<TransactionDataAccess>().SelectedTransaction = value; }
-        }
 
         public ObservableCollection<Account> AllAccounts {
             get { return ServiceLocator.Current.GetInstance<AccountDataAccess>().AllAccounts; }
@@ -61,7 +61,7 @@ namespace MoneyManager.Business.ViewModels {
                     ? Translation.GetTranslation("EditTitle")
                     : Translation.GetTranslation("AddTitle");
 
-                string type = TransactionTypeLogic.GetViewTitleForType(SelectedTransaction.Type);
+                string type = TransactionTypeLogic.GetViewTitleForType(_transactionRepository.Selected.Type);
 
                 return String.Format(text, type);
             }
@@ -78,9 +78,9 @@ namespace MoneyManager.Business.ViewModels {
         }
 
         public double AmountWithoutExchange {
-            get { return SelectedTransaction.AmountWithoutExchange; }
+            get { return _transactionRepository.Selected.AmountWithoutExchange; }
             set {
-                SelectedTransaction.AmountWithoutExchange = value;
+                _transactionRepository.Selected.AmountWithoutExchange = value;
                 CalculateNewAmount(value);
             }
         }
@@ -88,30 +88,30 @@ namespace MoneyManager.Business.ViewModels {
         public bool IsNavigationBlocked { get; set; }
 
         private void CalculateNewAmount(double value) {
-            if (Math.Abs(SelectedTransaction.ExchangeRatio) < 0.5) {
-                SelectedTransaction.ExchangeRatio = 1;
+            if (Math.Abs(_transactionRepository.Selected.ExchangeRatio) < 0.5) {
+                _transactionRepository.Selected.ExchangeRatio = 1;
             }
 
-            SelectedTransaction.Amount = SelectedTransaction.ExchangeRatio*value;
+            _transactionRepository.Selected.Amount = _transactionRepository.Selected.ExchangeRatio * value;
         }
 
         public async void SetCurrency(string currency) {
-            SelectedTransaction.Currency = currency;
+            _transactionRepository.Selected.Currency = currency;
             await LoadCurrencyRatio();
-            SelectedTransaction.IsExchangeModeActive = true;
+            _transactionRepository.Selected.IsExchangeModeActive = true;
             CalculateNewAmount(AmountWithoutExchange);
         }
 
         public async Task LoadCurrencyRatio() {
-            SelectedTransaction.ExchangeRatio =
-                await CurrencyLogic.GetCurrencyRatio(Settings.DefaultCurrency, SelectedTransaction.Currency);
+            _transactionRepository.Selected.ExchangeRatio =
+                await CurrencyLogic.GetCurrencyRatio(Settings.DefaultCurrency, _transactionRepository.Selected.Currency);
         }
 
         public async void Save() {
             if (IsEdit) {
-                await TransactionLogic.UpdateTransaction(SelectedTransaction);
+                await TransactionLogic.UpdateTransaction(_transactionRepository.Selected);
             } else {
-                await TransactionLogic.SaveTransaction(SelectedTransaction, RefreshRealtedList);
+                await TransactionLogic.SaveTransaction(_transactionRepository.Selected, RefreshRealtedList);
             }
 
             ((Frame) Window.Current.Content).GoBack();
@@ -119,7 +119,7 @@ namespace MoneyManager.Business.ViewModels {
 
         public async void Cancel() {
             if (IsEdit) {
-                await AccountLogic.AddTransactionAmount(SelectedTransaction);
+                await AccountLogic.AddTransactionAmount(_transactionRepository.Selected);
             }
 
             ((Frame) Window.Current.Content).GoBack();

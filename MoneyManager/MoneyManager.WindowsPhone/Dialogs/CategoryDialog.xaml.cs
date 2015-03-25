@@ -47,7 +47,7 @@ namespace MoneyManager.Dialogs {
             }
 
             if (IsEdit) {
-                CategoryData.Update(CategoryData.SelectedCategory);
+                CategoryData.Save(CategoryData.SelectedCategory);
             } else {
                 CategoryData.Save(CategoryData.SelectedCategory);
             }

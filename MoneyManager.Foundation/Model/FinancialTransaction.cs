@@ -1,48 +1,29 @@
 ﻿#region
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Practices.ServiceLocation;
-using MoneyManager.DataAccess.DataAccess;
-using MoneyManager.Foundation;
+using MoneyManager.DataAccess.Model;
 using PropertyChanged;
 using SQLite.Net.Attributes;
+using SQLiteNetExtensions.Attributes;
 
 #endregion
 
-namespace MoneyManager.DataAccess.Model {
+namespace MoneyManager.Foundation.Model {
     [ImplementPropertyChanged]
     [Table("FinancialTransactions")]
     public class FinancialTransaction {
-        #region Properties
-
-        private IEnumerable<Account> allAccounts {
-            get { return ServiceLocator.Current.GetInstance<AccountDataAccess>().AllAccounts; }
-        }
-
-        private IEnumerable<Category> allCategories {
-            get { return ServiceLocator.Current.GetInstance<CategoryDataAccess>().AllCategories; }
-        }
-
-        private AccountDataAccess accountData {
-            get { return ServiceLocator.Current.GetInstance<AccountDataAccess>(); }
-        }
-
-        private IEnumerable<RecurringTransaction> allRecurringTransactions {
-            get {
-                return ServiceLocator.Current.GetInstance<RecurringTransactionDataAccess>().AllRecurringTransactions;
-            }
-        }
-
-        #endregion Properties
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
+        [ForeignKey(typeof(Account))]
         public int ChargedAccountId { get; set; }
 
-        public int TargetAccountId { get; set; }
+        [ForeignKey(typeof(Account))]
+        public int? TargetAccountId { get; set; }
+
+        [ForeignKey(typeof(Category))]
+        public int? CategoryId { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -56,8 +37,6 @@ namespace MoneyManager.DataAccess.Model {
 
         public string Currency { get; set; }
 
-        public int? CategoryId { get; set; }
-
         public bool Cleared { get; set; }
 
         public int Type { get; set; }
@@ -66,49 +45,20 @@ namespace MoneyManager.DataAccess.Model {
 
         public bool IsRecurring { get; set; }
 
+        [ForeignKey(typeof(RecurringTransaction))]
         public int? ReccuringTransactionId { get; set; }
 
-        [Ignore]
-        public Account ChargedAccount {
-            get {
-                if (allAccounts == null) {
-                    accountData.LoadList();
-                }
-                return allAccounts.FirstOrDefault(x => x.Id == ChargedAccountId);
-            }
-            set { ChargedAccountId = value.Id; }
-        }
+        [ManyToOne]
+        public Account ChargedAccount { get; set; }
 
-        [Ignore]
-        public Account TargetAccount {
-            get {
-                if (allAccounts == null) {
-                    accountData.LoadList();
-                }
-                return allAccounts.FirstOrDefault(x => x.Id == TargetAccountId);
-            }
-            set { TargetAccountId = value.Id; }
-        }
+        [ManyToOne]
+        public Account TargetAccount { get; set; }
 
-        [Ignore]
-        public Category Category {
-            get {
-                return allCategories != null
-                    ? allCategories.FirstOrDefault(x => x.Id == CategoryId)
-                    : new Category();
-            }
-            set {
-                CategoryId = value == null
-                    ? (int?) null
-                    : value.Id;
-            }
-        }
+        [ManyToOne]
+        public Category Category { get; set; }
 
-        [Ignore]
-        public RecurringTransaction RecurringTransaction {
-            get { return allRecurringTransactions.FirstOrDefault(x => x.Id == ReccuringTransactionId); }
-            set { ReccuringTransactionId = value.Id; }
-        }
+        [ManyToOne]
+        public RecurringTransaction RecurringTransaction { get; set; }
 
         [Ignore]
         public bool ClearTransactionNow {

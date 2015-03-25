@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight;
 using Microsoft.Practices.ServiceLocation;
 using MoneyManager.DataAccess.DataAccess;
 using MoneyManager.DataAccess.Model;
+using MoneyManager.Foundation.OperationContracts;
 using PropertyChanged;
 
 #endregion
@@ -31,8 +32,8 @@ namespace MoneyManager.Business.ViewModels {
             get { return ServiceLocator.Current.GetInstance<CategoryDataAccess>(); }
         }
 
-        private TransactionDataAccess transactionData {
-            get { return ServiceLocator.Current.GetInstance<TransactionDataAccess>(); }
+        private ITransactionRepository TransactionRepository {
+            get { return ServiceLocator.Current.GetInstance<ITransactionRepository>(); }
         }
 
         private ObservableCollection<Category> allCategories {
@@ -41,15 +42,15 @@ namespace MoneyManager.Business.ViewModels {
 
         public Category SelectedCategory {
             get {
-                return transactionData.SelectedTransaction == null
+                return TransactionRepository.Selected== null
                     ? new Category()
-                    : transactionData.SelectedTransaction.Category;
+                    : TransactionRepository.Selected.Category;
             }
             set {
                 if (value == null) return;
 
                 if (!IsSettingCall) {
-                    ServiceLocator.Current.GetInstance<TransactionDataAccess>().SelectedTransaction.Category = value;
+                    TransactionRepository.Selected.Category = value;
                     ((Frame) Window.Current.Content).GoBack();
                 }
             }

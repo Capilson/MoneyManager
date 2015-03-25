@@ -1,6 +1,4 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,15 +7,14 @@ using MoneyManager.DataAccess.DataAccess;
 using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation;
 using MoneyManager.Foundation.Model;
-
-#endregion
+using MoneyManager.Foundation.OperationContracts;
 
 namespace MoneyManager.Business.Logic {
     public class StatisticLogic {
         #region Properties
 
         private static IEnumerable<FinancialTransaction> AllTransaction {
-            get { return ServiceLocator.Current.GetInstance<TransactionDataAccess>().AllTransactions; }
+            get { return ServiceLocator.Current.GetInstance<ITransactionRepository>().Data; }
         }
 
         private static IEnumerable<Category> AllCategories {

@@ -9,6 +9,7 @@ using MoneyManager.Business.Helper;
 using MoneyManager.DataAccess.DataAccess;
 using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation;
+using MoneyManager.Foundation.Model;
 using PropertyChanged;
 
 #endregion
@@ -28,6 +29,10 @@ namespace MoneyManager.Business.ViewModels {
 
         public TransactionDataAccess TransactionData {
             get { return ServiceLocator.Current.GetInstance<TransactionDataAccess>(); }
+        }
+
+        public IRecurringTransactionRepository RecurringTransactionRepository {
+            get { return ServiceLocator.Current.GetInstance<IRecurringTransactionRepository>(); }
         }
 
         public SettingDataAccess settings {
@@ -96,7 +101,7 @@ namespace MoneyManager.Business.ViewModels {
 
         private IEnumerable<FinancialTransaction> LoadUnclreadTransactions() {
             IEnumerable<FinancialTransaction> unclearedTransactions =
-                TransactionData.GetUnclearedTransactions(Utilities.GetEndOfMonth());
+                RecurringTransactionRepository.GetUnclearedTransactions(Utilities.GetEndOfMonth());
 
             return IsTransactionView
                 ? unclearedTransactions.Where(

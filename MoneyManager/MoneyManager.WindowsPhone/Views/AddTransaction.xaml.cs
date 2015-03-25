@@ -9,6 +9,7 @@ using MoneyManager.Business.Logic;
 using MoneyManager.Business.ViewModels;
 using MoneyManager.Common;
 using MoneyManager.Foundation;
+using MoneyManager.Foundation.OperationContracts;
 
 #endregion
 
@@ -25,20 +26,24 @@ namespace MoneyManager.Views {
             get { return ServiceLocator.Current.GetInstance<AddTransactionViewModel>(); }
         }
 
+        private ITransactionRepository transactionRepository {
+            get { return ServiceLocator.Current.GetInstance<ITransactionRepository>(); }
+        }
+
         public NavigationHelper NavigationHelper {
             get { return navigationHelper; }
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e) {
             if (e.NavigationMode != NavigationMode.Back && AddTransactionView.IsEdit) {
-                await AccountLogic.RemoveTransactionAmount(AddTransactionView.SelectedTransaction);
+                await AccountLogic.RemoveTransactionAmount(transactionRepository.Selected);
             }
 
             base.OnNavigatedTo(e);
         }
 
         private void DoneClick(object sender, RoutedEventArgs e) {
-            if (AddTransactionView.SelectedTransaction.ChargedAccount == null) {
+            if (transactionRepository.Selected.ChargedAccount == null) {
                 ShowAccountRequiredMessage();
                 return;
             }
