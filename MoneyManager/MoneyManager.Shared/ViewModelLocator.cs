@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using MoneyManager.Business.Helper;
+using MoneyManager.Business.Repositories;
 using MoneyManager.Business.ViewModels;
 using MoneyManager.DataAccess;
 using MoneyManager.DataAccess.DataAccess;
@@ -15,9 +16,15 @@ using MoneyManager.Views;
 namespace MoneyManager {
     public class ViewModelLocator {
         static ViewModelLocator() {
+            
             DatabaseLogic.CreateDatabase();
 
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+            //Logic
+            SimpleIoc.Default.Register<IUserNotification, UserNotification>();
+            SimpleIoc.Default.Register(CreateNavigationService);
+            SimpleIoc.Default.Register<Utilities>();
 
             //DataAccess
             SimpleIoc.Default.Register<AccountDataAccess>();
@@ -26,10 +33,10 @@ namespace MoneyManager {
             SimpleIoc.Default.Register<RecurringTransactionDataAccess>();
             SimpleIoc.Default.Register<SettingDataAccess>();
 
-            //Logic
-            SimpleIoc.Default.Register<IUserNotification, UserNotification>();
-            SimpleIoc.Default.Register(CreateNavigationService);
-            SimpleIoc.Default.Register<Utilities>();
+            //Repositories
+            SimpleIoc.Default.Register<IRecurringTransactionRepository, RecurringTransactionRepository>();
+            SimpleIoc.Default.Register<ITransactionRepository, TransactionRepository>();
+
             //ViewModels
             SimpleIoc.Default.Register<AddAccountViewModel>();
             SimpleIoc.Default.Register<AddTransactionViewModel>();

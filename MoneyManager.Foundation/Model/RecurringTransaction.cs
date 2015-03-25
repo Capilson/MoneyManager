@@ -1,9 +1,8 @@
 ﻿using System;
 using PropertyChanged;
 using SQLite.Net.Attributes;
-using SQLiteNetExtensions.Attributes;
 
-namespace MoneyManager.DataAccess.Model {
+namespace MoneyManager.Foundation.Model {
     [ImplementPropertyChanged]
     [Table("RecurringTransactiont")]
     public class RecurringTransaction {
@@ -11,13 +10,13 @@ namespace MoneyManager.DataAccess.Model {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [ForeignKey(typeof(Account))]
+        //[ForeignKey(typeof(Account))]
         public int ChargedAccountId { get; set; }
 
-        [ForeignKey(typeof(Account))]
+        //[ForeignKey(typeof(Account))]
         public int? TargetAccountId { get; set; }
 
-        [ForeignKey(typeof(Category))]
+        //[ForeignKey(typeof(Category))]
         public int? CategoryId { get; set; }
 
         public DateTime StartDate { get; set; }
@@ -38,13 +37,13 @@ namespace MoneyManager.DataAccess.Model {
 
         public string Note { get; set; }
 
-        [ManyToOne]
+        //[ManyToOne]
         public Account ChargedAccount { get; set; }
 
-        [ManyToOne]
+        //[ManyToOne]
         public Account TargetAccount { get; set; }
 
-        [ManyToOne]
+        //[ManyToOne]
         public Category Category { get; set; }
     }
 }

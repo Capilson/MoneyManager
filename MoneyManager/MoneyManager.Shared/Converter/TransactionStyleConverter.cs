@@ -2,7 +2,6 @@
 
 using System;
 using Windows.UI.Xaml.Data;
-using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation.Model;
 
 #endregion

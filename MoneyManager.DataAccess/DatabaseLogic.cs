@@ -1,6 +1,5 @@
 ﻿#region
 
-using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation.Model;
 using SQLite.Net;
 
@@ -11,9 +10,9 @@ namespace MoneyManager.DataAccess {
         public static void CreateDatabase() {
             using (SQLiteConnection dbConn = SqlConnectionFactory.GetSqlConnection()) {
                 dbConn.CreateTable<Account>();
+                dbConn.CreateTable<Category>();
                 dbConn.CreateTable<FinancialTransaction>();
                 dbConn.CreateTable<RecurringTransaction>();
-                dbConn.CreateTable<Category>();
             }
         }
     }

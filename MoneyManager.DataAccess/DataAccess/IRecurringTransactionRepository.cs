@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation.Model;
 using MoneyManager.Foundation.OperationContracts;
 

@@ -1,10 +1,8 @@
 ﻿#region
 
 using System;
-using MoneyManager.DataAccess.Model;
 using PropertyChanged;
 using SQLite.Net.Attributes;
-using SQLiteNetExtensions.Attributes;
 
 #endregion
 
@@ -16,13 +14,13 @@ namespace MoneyManager.Foundation.Model {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [ForeignKey(typeof(Account))]
+        //[ForeignKey(typeof(Account))]
         public int ChargedAccountId { get; set; }
 
-        [ForeignKey(typeof(Account))]
+        //[ForeignKey(typeof(Account))]
         public int? TargetAccountId { get; set; }
 
-        [ForeignKey(typeof(Category))]
+        //[ForeignKey(typeof(Category))]
         public int? CategoryId { get; set; }
 
         public DateTime Date { get; set; }
@@ -45,19 +43,19 @@ namespace MoneyManager.Foundation.Model {
 
         public bool IsRecurring { get; set; }
 
-        [ForeignKey(typeof(RecurringTransaction))]
+        //[ForeignKey(typeof(RecurringTransaction))]
         public int? ReccuringTransactionId { get; set; }
 
-        [ManyToOne]
+        //[ManyToOne]
         public Account ChargedAccount { get; set; }
 
-        [ManyToOne]
+        //[ManyToOne]
         public Account TargetAccount { get; set; }
 
-        [ManyToOne]
+        //[ManyToOne]
         public Category Category { get; set; }
 
-        [ManyToOne]
+        //[ManyToOne]
         public RecurringTransaction RecurringTransaction { get; set; }
 
         [Ignore]

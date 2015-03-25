@@ -3,7 +3,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation.Model;
 using SQLite.Net;
 
@@ -13,7 +12,7 @@ namespace MoneyManager.DataAccess.WindowsPhone.Test {
     [TestClass]
     public class DatabaseLogicTest {
         [TestMethod]
-        public void CreateDatabaseTest() {
+        public void DatabaseLogic_CreateDatabaseTest() {
             DatabaseLogic.CreateDatabase();
 
             using (SQLiteConnection dbConn = SqlConnectionFactory.GetSqlConnection()) {

@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation;
 using MoneyManager.Foundation.Model;
 using PropertyChanged;
 using SQLite.Net;
-using SQLiteNetExtensions.Extensions;
 
 namespace MoneyManager.DataAccess.DataAccess {
     [ImplementPropertyChanged]
@@ -17,11 +15,11 @@ namespace MoneyManager.DataAccess.DataAccess {
         /// <param name="transaction">transaction to save.</param>
         protected override void SaveToDb(FinancialTransaction transaction) {
             using (SQLiteConnection db = SqlConnectionFactory.GetSqlConnection()) {
-                if (transaction.Id == 0) {
-                    db.InsertWithChildren(transaction);
-                } else {
-                    db.UpdateWithChildren(transaction);
-                }
+                //if (transaction.Id == 0) {
+                //    db.InsertWithChildren(transaction);
+                //} else {
+                //    db.UpdateWithChildren(transaction);
+                //}
                 
                 db.Insert(transaction);
             }

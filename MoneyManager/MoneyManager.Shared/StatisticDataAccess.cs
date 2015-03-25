@@ -1,17 +1,12 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using MoneyManager.Business.Helper;
 using MoneyManager.DataAccess;
-using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation;
 using MoneyManager.Foundation.Model;
 using SQLite.Net;
-
-#endregion
 
 namespace MoneyManager {
     public class StatisticDataAccess {

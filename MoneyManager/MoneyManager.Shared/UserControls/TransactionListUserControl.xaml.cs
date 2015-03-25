@@ -8,7 +8,6 @@ using Microsoft.Practices.ServiceLocation;
 using MoneyManager.Business.Logic;
 using MoneyManager.Business.ViewModels;
 using MoneyManager.DataAccess.DataAccess;
-using MoneyManager.DataAccess.Model;
 using MoneyManager.Foundation.Model;
 using MoneyManager.Foundation.OperationContracts;
 using MoneyManager.Views;
